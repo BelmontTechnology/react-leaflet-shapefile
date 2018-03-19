@@ -8,7 +8,7 @@ import * as shp from 'shpjs';
 /* global cw, shp */
 L.Shapefile = L.GeoJSON.extend({
   options: {
-    importUrl: 'shp.js'
+    importUrl: './vendor/react-leaflet-shapefile/shp.js'
   },
 
   initialize: function(file, options) {
@@ -17,7 +17,7 @@ L.Shapefile = L.GeoJSON.extend({
       /*eslint-disable no-new-func*/
       if (!options.isArrayBufer) {
         this.worker = cw(new Function('data', 'cb', 'importScripts("' + this.options.importUrl + '");shp(data).then(cb);'));
-      } 
+      }
       else {
          this.worker = cw(new Function('data', 'importScripts("' + this.options.importUrl + '");return shp.parseZip(data);'));
       }
@@ -63,4 +63,3 @@ L.Shapefile = L.GeoJSON.extend({
 L.shapefile = function(a, b, c) {
   return new L.Shapefile(a, b, c);
 };
-
